@@ -5,37 +5,43 @@ import C from './constants';
 export function setTip(tip){
   return {
     type: C.SET_TIP,
-    tip,
+    payload: tip,
   }
 }
 export function setBill(bill){
   return {
     type: C.SET_BILL,
-    bill,
+    payload: bill,
   }
 }
 export function setSplit(split){
   return {
     type: C.SET_SPLIT,
-    split,
+    payload: split,
   }
 }
 export function setResult(result){
   return {
     type: C.SET_RESULT,
-    result,
+    payload: result,
   }
 }
-export function setStep(step){
+export function setRoute(route){
   return {
-    type: C.SET_STEP,
-    step,
+    type: C.SET_ROUTE,
+    payload: route,
   }
 }
 export function setMood(mood){
   return {
     type: C.SET_MOOD,
-    mood,
+    payload: mood,
+  }
+}
+export function openVenmo(){
+  return {
+    type: C.OPEN_VENMO,
+    // hasVenmo: true
   }
 }
 
@@ -45,10 +51,9 @@ const initialState = {
   split: 0,
   bill: 0,
   result: 0,
-  step: 0,
+  route: "/",
   isError: false,
   error: "",
-  emojis: ['😢', '😐', '🙂', '😆'],
   mood: '😐',
 }
 
@@ -75,10 +80,11 @@ export default function tipReducer(state=initialState, action){
         ...state,
         split: action.payload
       }
-    case C.SET_STEP:
+    case C.SET_ROUTE:
+      console.log("REDUCCER ", action)
       return {
         ...state,
-        step: action.payload
+        route: action.payload
       }
     case C.SET_ERROR:
       return {
@@ -92,6 +98,26 @@ export default function tipReducer(state=initialState, action){
         isError: false,
         error: ""
       }
+    case C.SET_MOOD:
+      let mood = '😐';
+      switch(true){
+        case (action.payload <= 9):
+          mood = '😢';
+          break;
+        case (action.payload >= 20 && action.payload < 30):
+          mood = '🙂'
+          break;
+        case (action.payload >= 30):
+          mood= '😆';
+          break;
+        default:
+          mood= '😐';
+      }
+      return {
+        ...state,
+        mood
+      }
+     
     default:
       return state
   }
