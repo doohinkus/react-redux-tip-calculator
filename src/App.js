@@ -5,7 +5,8 @@ import {
   setMood,
   setSplit,
   setResult,
-  setRoute
+  setRoute,
+  setError
  } from "./redux/tipDuck";
 
  import AppContainer from './containers/AppContainer';

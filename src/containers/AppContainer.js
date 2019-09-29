@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Fragment } from "react";
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 
 import '../App.css';
@@ -30,6 +30,7 @@ function AppContainer({
   setMood,
   setSplit,
   setResult,
+  setError,
   setRoute}) {
   const label = "Server";
   function openVenmo(){
@@ -59,9 +60,14 @@ function AppContainer({
                 title="Tab/Bill"
                 error={null}
                 isError={false}
-                buttonTitle={"Next"}
+                buttonTitleNext={"Next"}
+                buttonTitlePrev={null}
+                setError={setError}
                 // dispatch when input is valid
-                setRoute={setRoute}
+                dest={{
+                  next: "/tip",
+                  prev: null
+                }}
               />
             )} 
           />
@@ -70,9 +76,38 @@ function AppContainer({
                 title="Tip"
                 error={null}
                 isError={false}
-                buttonTitle={"Next"}
-                action={null}
+                buttonTitleNext={"Next"}
+                buttonTitlePrev={"Prev"}
+                dest={{
+                  next: "/split",
+                  prev: "/"
+                }}
               />
+            )} 
+          />
+          <Route path="/split" render={() => (
+              <>
+                <Input 
+                  title="Split"
+                  error={null}
+                  isError={false}
+                  buttonTitleNext={"Calculate"}
+                  buttonTitlePrev={null}
+                  dest={{
+                    next: "/result",
+                    prev: "/tip"
+                  }}
+                />
+                {/* <Link className="btn btn-primary d-inline m-2" to="/">Restart</Link> */}
+              </>
+            )} 
+          />
+          <Route path="/result" render={() => (
+              <div>
+                <p>Result</p>
+                <p>Venmo Link</p>
+                <Link className="btn btn-primary d-inline m-2" to="/">Restart</Link>
+              </div>
             )} 
           />
           {/* <Route path="/" exact component={Bill} /> */}
