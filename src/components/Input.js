@@ -1,11 +1,13 @@
 import React, { Fragment } from 'react';
 import { useSelector } from 'react-redux';
-import { Link } from "react-router-dom";
 
 
 
-function Input({ title, setError, error, isError, dest, buttonTitleNext, buttonTitlePrev }){
-  const route = useSelector(state => state.route);
+function Input({ title, setError, field, error, isError, dest, handleClick, buttonTitleNext, buttonTitlePrev }){
+  // const route = useSelector(state => state.route);
+  const amount = useSelector(state => state[field]);
+  const step = useSelector(state => state.step);
+
 
   function checkInput(e){
     console.log(e.target.value);
@@ -14,21 +16,21 @@ function Input({ title, setError, error, isError, dest, buttonTitleNext, buttonT
 
   return (
     <>
-      <h2>{title}</h2>
+      <h2>{title}: {amount}</h2>
       <h3>{isError && error}</h3>
       <input 
-        type="number"
-        inputMode="numeric"
-        min="0"
-        max="100000000"
+        type="text"
+        name={field}
+        inputMode="decimal"
+        pattern="[0-9]+"
+        maxLength={11}
         onChange={checkInput}
       />
       <div className="d-flex mt-3">
-
         {buttonTitlePrev && 
-          (<Link className="btn btn-primary d-inline m-2" to={dest.prev}>{buttonTitlePrev}</Link>)
+          (<button className="btn btn-primary d-inline m-2" onClick={() => handleClick(step)}>{buttonTitlePrev}</button>)
         }
-        <Link className="btn btn-primary d-inline m-2" to={dest.next}>{buttonTitleNext}</Link>
+        <button className="btn btn-primary d-inline m-2" onClick={() => handleClick(step)}>{buttonTitleNext}</button>
       </div>
     </>
   );

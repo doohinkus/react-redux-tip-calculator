@@ -26,16 +26,22 @@ export function setResult(result){
     payload: result,
   }
 }
-export function setRoute(route){
+export function setStep(step){
   return {
-    type: C.SET_ROUTE,
-    payload: route,
+    type: C.SET_STEP,
+    payload: step,
   }
 }
 export function setMood(mood){
   return {
     type: C.SET_MOOD,
     payload: mood,
+  }
+}
+export function setError(error){
+  return {
+    type: C.SET_ERROR,
+    payload: error,
   }
 }
 export function openVenmo(){
@@ -51,7 +57,7 @@ const initialState = {
   split: 0,
   bill: 0,
   result: 0,
-  route: "/",
+  step: 1,
   isError: false,
   error: "",
   mood: '😐',
@@ -80,11 +86,10 @@ export default function tipReducer(state=initialState, action){
         ...state,
         split: action.payload
       }
-    case C.SET_ROUTE:
-      console.log("REDUCCER ", action)
+    case C.SET_STEP:
       return {
         ...state,
-        route: action.payload
+        step: action.payload
       }
     case C.SET_ERROR:
       return {

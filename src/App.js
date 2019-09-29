@@ -5,7 +5,7 @@ import {
   setMood,
   setSplit,
   setResult,
-  setRoute,
+  setStep,
   setError
  } from "./redux/tipDuck";
 
@@ -23,7 +23,8 @@ function mapDispatchToProps(dispatch) {
     setMood: (mood) => dispatch(setMood(mood)),
     setSplit: (split) => dispatch(setSplit(split)),
     setResult: (result) => dispatch(setResult(result)),
-    setRoute: (route) => dispatch(setRoute(route)),
+    setStep: (step) => dispatch(setStep(step)),
+    setError: (error) => dispatch(setError(error)),
   }
 };
 
