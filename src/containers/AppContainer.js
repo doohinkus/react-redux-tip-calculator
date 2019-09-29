@@ -1,9 +1,11 @@
 import React, { Fragment, useContext, useCallback } from "react";
 import { Link, Route, __RouterContext, Redirect } from "react-router-dom";
+import { useSelector } from 'react-redux';
 
 import '../App.css';
 import Server from "../components/Server";
 import Input from "../components/Input";
+import { restElement } from "@babel/types";
 
 // VENMO deep links
 // venmo://authorization
@@ -36,25 +38,33 @@ function AppContainer({
   const label = "Server";
 
   const { history } = useContext(__RouterContext);
+  const step = useSelector(state => state.step);
+  function reset(){
+    setStep(1);
+    history.push(`/1`);
+  }
 // createnext and prev functions
-  function handleClick(step){
-    console.log(`Click from ${step}`);
-    setStep(step);
-    // const dest = step >= 2 && step <= 4 ? step : "";
-    let dest = 1;
-    switch(step){
-      case (step >= 2 && step <= 3 ):
-        dest = step;
-        break;
-      case (step >= 4):
-        dest = 4;
-        break;
-      default:
-        dest = 1;
+  function next(){
+    console.log(`Click from NEXT ${step}`);
+    if(step < 4 ){
+      const dest = step + 1;
+      setStep(dest);
+      history.push(`/${dest}`);
     }
-    console.log(dest);
+ }
+ function prev(){
+  if(step >= 2 ){
+    const dest = step - 1;
+    setStep(dest);
     history.push(`/${dest}`);
-   //  valid input -> update store -> go to next step
+  }
+  console.log(`Click from PREV ${step}`);
+
+ }
+ function calculate(){
+   console.log(`CALCULATE!!! ${step}`);
+   setStep(4);
+   history.push("/4")
  }
 
   function openVenmo(){
@@ -66,6 +76,73 @@ function AppContainer({
 
 
 
+  const stepOne =(
+    // route in store
+    // switch <Redirect to={currentStep} />
+      <Input 
+        title="Tab/Bill"
+        field="bill"
+        error={null}
+        isError={false}
+        buttonTitleNext={"Next"}
+        buttonTitlePrev={null}
+        setError={setError}
+        next={next}
+        prev={prev}
+        // dispatch when input is valid
+        dest={{
+          next: "/tip",
+          prev: null
+        }}
+      />
+    )
+    const stepTwo =(
+      <Input 
+        title="Tip"
+        field="tip"
+        error={null}
+        isError={false}
+        buttonTitleNext={"Next"}
+        buttonTitlePrev={"Prev"}
+        next={next}
+        prev={prev}
+
+        dest={{
+          next: "/split",
+          prev: "/"
+        }}
+      />
+    )
+
+    const stepThree =(
+      <>
+        <Input 
+          title="Split"
+          field="split"
+          error={null}
+          isError={false}
+          buttonTitleNext={null}
+          buttonTitlePrev={null}
+          buttonTitleCalculate={"Calculate"}
+          next={next}
+          prev={prev}
+          calculate={calculate}   
+          dest={{
+            next: "/result",
+            prev: "/tip"
+          }}
+        />
+        {/* <Link className="btn btn-primary d-inline m-2" to="/">Restart</Link> */}
+      </>
+    )
+
+    const result = (
+      <div>
+        <p>Result</p>
+        <p>Venmo Link</p>
+        <button className="btn btn-primary d-inline m-2" onClick={() => reset()}>Restart</button>
+      </div>
+    )
   return (
       <div className="App">
         <header className="App-container">
@@ -79,72 +156,11 @@ function AppContainer({
             Open Venmo
         </button> */}
 
-        <Route path="/1" exact render={() => (
-          // route in store
-          // switch <Redirect to={currentStep} />
-            <Input 
-              title="Tab/Bill"
-              field="bill"
-              error={null}
-              isError={false}
-              buttonTitleNext={"Next"}
-              buttonTitlePrev={null}
-              setError={setError}
-              handleClick={handleClick}
-              // dispatch when input is valid
-              dest={{
-                next: "/tip",
-                prev: null
-              }}
-            />
-          )} 
-        />
-        <Redirect from="/" to="/1" />
-        <Route path="/2" render={() => (
-            <Input 
-              title="Tip"
-              field="tip"
-              error={null}
-              isError={false}
-              buttonTitleNext={"Next"}
-              buttonTitlePrev={"Prev"}
-              handleClick={handleClick}
-
-              dest={{
-                next: "/split",
-                prev: "/"
-              }}
-            />
-          )} 
-        />
-        <Route path="/3" render={() => (
-            <>
-              <Input 
-                title="Split"
-                field="split"
-                error={null}
-                isError={false}
-                buttonTitleNext={"Calculate"}
-                buttonTitlePrev={null}
-                handleClick={handleClick}
-
-                dest={{
-                  next: "/result",
-                  prev: "/tip"
-                }}
-              />
-              {/* <Link className="btn btn-primary d-inline m-2" to="/">Restart</Link> */}
-            </>
-          )} 
-        />
-        <Route path="/4" render={() => (
-            <div>
-              <p>Result</p>
-              <p>Venmo Link</p>
-              <Link className="btn btn-primary d-inline m-2" to="/">Restart</Link>
-            </div>
-          )} 
-        />
+        <Route path="/" exact render={() => stepOne} />
+        <Route path="/1" render={() => stepOne} />
+        <Route path="/2" render={() => stepTwo} />
+        <Route path="/3" render={() => stepThree} />
+        <Route path="/4" render={() => result} />
         {/* <Route path="/" exact component={Bill} /> */}
 
         </header>
