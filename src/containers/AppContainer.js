@@ -5,7 +5,6 @@ import { useSelector } from 'react-redux';
 import '../App.css';
 import Server from "../components/Server";
 import Input from "../components/Input";
-import { restElement } from "@babel/types";
 
 // VENMO deep links
 // venmo://authorization
@@ -75,7 +74,6 @@ function AppContainer({
   }
 
 
-
   const stepOne =(
     // route in store
     // switch <Redirect to={currentStep} />
@@ -89,6 +87,7 @@ function AppContainer({
         setError={setError}
         next={next}
         prev={prev}
+        action={setBill}
         // dispatch when input is valid
         dest={{
           next: "/tip",
@@ -106,7 +105,7 @@ function AppContainer({
         buttonTitlePrev={"Prev"}
         next={next}
         prev={prev}
-
+        action={setTip}
         dest={{
           next: "/split",
           prev: "/"
@@ -126,6 +125,7 @@ function AppContainer({
           buttonTitleCalculate={"Calculate"}
           next={next}
           prev={prev}
+          action={setSplit}
           calculate={calculate}   
           dest={{
             next: "/result",

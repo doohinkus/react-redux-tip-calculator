@@ -53,10 +53,10 @@ export function openVenmo(){
 
 // INITIAL STATE
 const initialState = {
-  tip: 0,
-  split: 0,
-  bill: 0,
-  result: 0,
+  tip: "",
+  split: "",
+  bill: "",
+  result: "",
   step: 1,
   isError: false,
   error: "",

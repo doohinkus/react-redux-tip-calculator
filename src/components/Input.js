@@ -3,23 +3,36 @@ import { useSelector } from 'react-redux';
 
 
 
-function Input({ title, setError, field, calculate, error, isError, next, prev, buttonTitleCalculate, buttonTitleNext, buttonTitlePrev }){
+function Input({ 
+  title, 
+  setError, 
+  action, 
+  field, 
+  calculate, 
+  error, 
+  isError, 
+  next, 
+  prev, 
+  buttonTitleCalculate, 
+  buttonTitleNext, 
+  buttonTitlePrev 
+}){
   // const route = useSelector(state => state.route);
   const amount = useSelector(state => state[field]);
-  const [value, setValue] = useState("");
+  // const [value, setValue] = useState("");
 
 
   function checkInput(e){
     const regEx = /^[0-9]*[.]?[0-9]*$/;
-    // console.log(e.target.value, " ", regEx.test(e.target.value), " ", e.target.value.length - 1);
     if (regEx.test(e.target.value)){
-      setValue(e.target.value);
+      action(e.target.value);
     }
   }
+  
 
   return (
     <>
-      <h2>{title}: {value}</h2>
+      <h2>{title}: {amount}</h2>
       <h3>{isError && error}</h3>
       <input 
         type="text"
@@ -28,7 +41,7 @@ function Input({ title, setError, field, calculate, error, isError, next, prev, 
         pattern="[0-9]+.?[0-9]+"
         maxLength={11}
         onChange={checkInput}
-        value={value}
+        value={amount}
       />
       <div className="d-flex mt-3">
         {buttonTitlePrev && 
