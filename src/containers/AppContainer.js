@@ -30,6 +30,7 @@ function AppContainer({
   setTip,
   setBill,
   setMood,
+  clearError,
   setSplit,
   setResult,
   setError,
@@ -73,18 +74,17 @@ function AppContainer({
      window.location = "venmo://banktransfer";
   }
 
-
+ 
   const stepOne =(
     // route in store
     // switch <Redirect to={currentStep} />
       <Input 
         title="Tab/Bill"
         field="bill"
-        error={null}
-        isError={false}
         buttonTitleNext={"Next"}
         buttonTitlePrev={null}
         setError={setError}
+        clearError={clearError}
         next={next}
         prev={prev}
         action={setBill}
@@ -106,10 +106,8 @@ function AppContainer({
         next={next}
         prev={prev}
         action={setTip}
-        dest={{
-          next: "/split",
-          prev: "/"
-        }}
+        setError={setError}
+        clearError={clearError}
       />
     )
 
@@ -127,10 +125,8 @@ function AppContainer({
           prev={prev}
           action={setSplit}
           calculate={calculate}   
-          dest={{
-            next: "/result",
-            prev: "/tip"
-          }}
+          setError={setError}
+          clearError={clearError}
         />
         {/* <Link className="btn btn-primary d-inline m-2" to="/">Restart</Link> */}
       </>

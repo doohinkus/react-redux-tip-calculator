@@ -6,7 +6,8 @@ import {
   setSplit,
   setResult,
   setStep,
-  setError
+  setError,
+  clearError
  } from "./redux/tipDuck";
 
  import AppContainer from './containers/AppContainer';
@@ -25,6 +26,7 @@ function mapDispatchToProps(dispatch) {
     setResult: (result) => dispatch(setResult(result)),
     setStep: (step) => dispatch(setStep(step)),
     setError: (error) => dispatch(setError(error)),
+    clearError: () => dispatch(clearError()),
   }
 };
 

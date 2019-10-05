@@ -44,6 +44,11 @@ export function setError(error){
     payload: error,
   }
 }
+export function clearError(){
+  return {
+    type: C.CLEAR_ERROR,
+  }
+}
 export function openVenmo(){
   return {
     type: C.OPEN_VENMO,

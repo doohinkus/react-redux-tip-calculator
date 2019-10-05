@@ -9,16 +9,17 @@ function Input({
   action, 
   field, 
   calculate, 
-  error, 
-  isError, 
   next, 
   prev, 
   buttonTitleCalculate, 
   buttonTitleNext, 
-  buttonTitlePrev 
+  buttonTitlePrev,
+  clearError
 }){
   // const route = useSelector(state => state.route);
   const amount = useSelector(state => state[field]);
+  const error = useSelector(state => state.error);
+  const isError = useSelector(state => state.isError);
   // const [value, setValue] = useState("");
 
 
@@ -26,10 +27,13 @@ function Input({
     const regEx = /^[0-9]*[.]?[0-9]*$/;
     if (regEx.test(e.target.value)){
       action(e.target.value);
+      clearError()
+    } else{
+      setError("Please enter a valid amount.")
     }
   }
   
-
+  console.log("ERRROR", error, " ", isError)
   return (
     <>
       <h2>{title}: {amount}</h2>
@@ -38,7 +42,7 @@ function Input({
         type="text"
         name={field}
         inputMode="decimal"
-        pattern="[0-9]+.?[0-9]+"
+        pattern="[0-9]*"
         maxLength={11}
         onChange={checkInput}
         value={amount}
