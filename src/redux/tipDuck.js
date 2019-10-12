@@ -5,19 +5,19 @@ import C from './constants';
 export function setTip(tip){
   return {
     type: C.SET_TIP,
-    payload: tip,
+    payload: tip
   }
 }
 export function setBill(bill){
   return {
     type: C.SET_BILL,
-    payload: bill,
+    payload: bill
   }
 }
 export function setSplit(split){
   return {
     type: C.SET_SPLIT,
-    payload: split,
+    payload: split
   }
 }
 export function setResult(result){

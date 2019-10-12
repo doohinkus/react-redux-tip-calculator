@@ -5,6 +5,7 @@ import { useSelector } from 'react-redux';
 import '../App.css';
 import Server from "../components/Server";
 import Input from "../components/Input";
+import Result from "../components/Result";
 
 // VENMO deep links
 // venmo://authorization
@@ -39,6 +40,7 @@ function AppContainer({
 
   const { history } = useContext(__RouterContext);
   const step = useSelector(state => state.step);
+  const state = useSelector(state => state);
   function reset(){
     setStep(1);
     history.push(`/1`);
@@ -63,8 +65,14 @@ function AppContainer({
  }
  function calculate(){
    console.log(`CALCULATE!!! ${step}`);
+   const bill = parseFloat(state.bill).toFixed(2);
+   const tip = parseFloat(parseInt(state.tip)/100).toFixed(2);
+   const split = parseInt(state.split);
+   const result = (bill + bill*(tip)) / split;
+   // set result
+   setResult(result);
    setStep(4);
-   history.push("/4")
+   history.push("/4");
  }
 
   function openVenmo(){
@@ -119,7 +127,7 @@ function AppContainer({
           error={null}
           isError={false}
           buttonTitleNext={null}
-          buttonTitlePrev={null}
+          buttonTitlePrev={"Prev"}
           buttonTitleCalculate={"Calculate"}
           next={next}
           prev={prev}
@@ -134,7 +142,7 @@ function AppContainer({
 
     const result = (
       <div>
-        <p>Result</p>
+        <Result />
         <p>Venmo Link</p>
         <button className="btn btn-primary d-inline m-2" onClick={() => reset()}>Restart</button>
       </div>
