@@ -32,10 +32,10 @@ export function setStep(step){
     payload: step,
   }
 }
-export function setMood(mood){
+export function setMood(tip){
   return {
     type: C.SET_MOOD,
-    payload: mood,
+    payload: tip,
   }
 }
 export function setError(error){
@@ -58,8 +58,8 @@ export function openVenmo(){
 
 // INITIAL STATE
 const initialState = {
-  tip: "",
-  split: "",
+  tip: 15,
+  split: 1,
   bill: "",
   result: "",
   step: 1,

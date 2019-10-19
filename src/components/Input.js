@@ -28,20 +28,22 @@ function Input({
     const regEx = /^[0-9]*[.]?[0-9]*$/;
     if (regEx.test(e.target.value)){
       action(e.target.value);
-      clearError()
+      clearError();
     } else{
-      setError("Please enter a valid amount.")
+      setError("Please enter a valid amount.");
     }
   }
   
-  console.log("ERRROR", error, " ", isError);
   const isTip = title === "Tip";
+  const explaination = (
+    <p className="p3">For example, if your bill is $10.00 and you split the bill between two persons, then your share of the bill is $5.00. Your tip is based on $5.00, instead of the entire bill $10.00.</p>
+  );
   return (
     <>
       <h2>{title}: {amount} {isTip && (<span>%</span>)}</h2>
       <h3>{isError && error}</h3>
       <h4>{isTip && (<p><span onClick={() => setTipExplaination(!isTipExplaination)}>Percentage</span> based on your share of bill.</p>)}</h4>
-      {isTipExplaination && (<p className="p3">For example, if your bill is $10.00 and your split the bill between two persons, then your share of the bill is 5.00. Your tip is calcuated for on 5.00, instead of the entire bill $10.00.</p>)}
+      {isTipExplaination && explaination}
       <input 
         type="text"
         name={field}

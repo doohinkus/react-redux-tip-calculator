@@ -53,35 +53,37 @@ function AppContainer({
       setStep(dest);
       history.push(`/${dest}`);
     }
- }
- function prev(){
-  if(step >= 2 ){
-    const dest = step - 1;
-    setStep(dest);
-    history.push(`/${dest}`);
   }
-  console.log(`Click from PREV ${step}`);
-
- }
- function calculate(){
-   console.log(`CALCULATE!!! ${step}`);
-   const bill = parseFloat(state.bill).toFixed(2);
-   const tip = parseFloat(parseInt(state.tip)/100).toFixed(2);
-   const split = parseInt(state.split);
-   const result = (bill + bill*(tip)) / split;
-   // set result
-   setResult(result);
-   setStep(4);
-   history.push("/4");
- }
-
+  function prev(){
+    if(step >= 2 ){
+      const dest = step - 1;
+      setStep(dest);
+      history.push(`/${dest}`);
+    }
+    console.log(`Click from PREV ${step}`);
+  }
+  function calculate(){
+    console.log(`CALCULATE!!! ${step}`);
+    const bill = parseFloat(state.bill).toFixed(2);
+    const tip = state.tip > 0 ? parseFloat(parseInt(state.tip)/100).toFixed(2) : 1;
+    const split = parseInt(state.split);
+    const result = parseFloat((bill))/split + (bill*tip);
+    // set result
+    setResult(result.toFixed(2));
+    setStep(4);
+    history.push("/4");
+  }
+ 
   function openVenmo(){
     setTimeout(function () {
          console.log("Venmo not installed");
        }, 35);
      window.location = "venmo://banktransfer";
   }
-
+  function addTip(tip){
+    setTip(tip);
+    setMood(tip);
+  }
  
   const stepOne =(
     // route in store
@@ -96,11 +98,6 @@ function AppContainer({
         next={next}
         prev={prev}
         action={setBill}
-        // dispatch when input is valid
-        dest={{
-          next: "/tip",
-          prev: null
-        }}
       />
     )
     const stepTwo =(
@@ -113,7 +110,7 @@ function AppContainer({
         buttonTitlePrev={"Prev"}
         next={next}
         prev={prev}
-        action={setTip}
+        action={addTip}
         setError={setError}
         clearError={clearError}
       />
@@ -149,7 +146,7 @@ function AppContainer({
     )
   return (
       <div className="App">
-        <header className="App-container">
+        <section className="App-container">
         <h1>Tip Calculator</h1>
         <Server label={label} />
         {/* <FormStepper /> */}
@@ -167,7 +164,7 @@ function AppContainer({
         <Route path="/4" render={() => result} />
         {/* <Route path="/" exact component={Bill} /> */}
 
-        </header>
+        </section>
       </div>
   );
 }
