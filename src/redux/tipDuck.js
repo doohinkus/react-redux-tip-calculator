@@ -72,9 +72,24 @@ const initialState = {
 export default function tipReducer(state=initialState, action){
   switch(action.type){
     case C.SET_TIP:
+        let mood = '😐';
+        switch(true){
+          case (action.payload <= 9):
+            mood = '😢';
+            break;
+          case (action.payload >= 20 && action.payload < 30):
+            mood = '🙂'
+            break;
+          case (action.payload >= 30):
+            mood= '😆';
+            break;
+          default:
+            mood= '😐';
+        }
       return {
         ...state,
-        tip: action.payload
+        tip: action.payload,
+        mood
       }
     case C.SET_BILL:
       return {
@@ -109,20 +124,20 @@ export default function tipReducer(state=initialState, action){
         error: ""
       }
     case C.SET_MOOD:
-      let mood = '😐';
-      switch(true){
-        case (action.payload <= 9):
-          mood = '😢';
-          break;
-        case (action.payload >= 20 && action.payload < 30):
-          mood = '🙂'
-          break;
-        case (action.payload >= 30):
-          mood= '😆';
-          break;
-        default:
-          mood= '😐';
-      }
+      // let mood = '😐';
+      // switch(true){
+      //   case (action.payload <= 9):
+      //     mood = '😢';
+      //     break;
+      //   case (action.payload >= 20 && action.payload < 30):
+      //     mood = '🙂'
+      //     break;
+      //   case (action.payload >= 30):
+      //     mood= '😆';
+      //     break;
+      //   default:
+      //     mood= '😐';
+      // }
       return {
         ...state,
         mood

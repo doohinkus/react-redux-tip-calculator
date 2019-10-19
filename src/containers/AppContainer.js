@@ -62,14 +62,16 @@ function AppContainer({
     }
     console.log(`Click from PREV ${step}`);
   }
-  function calculate(){
-    console.log(`CALCULATE!!! ${step}`);
-    const bill = parseFloat(state.bill).toFixed(2);
+  function updateTotal(){
     const tip = state.tip > 0 ? parseFloat(parseInt(state.tip)/100).toFixed(2) : 1;
     const split = parseInt(state.split);
+    const bill = parseFloat(state.bill).toFixed(2);
     const result = parseFloat((bill))/split + (bill*tip);
     // set result
     setResult(result.toFixed(2));
+  }
+  function calculate(){
+    updateTotal();
     setStep(4);
     history.push("/4");
   }
@@ -82,7 +84,6 @@ function AppContainer({
   }
   function addTip(tip){
     setTip(tip);
-    setMood(tip);
   }
  
   const stepOne =(
@@ -139,7 +140,17 @@ function AppContainer({
 
     const result = (
       <div>
-        <Result />
+        <Result 
+          setTip={setTip}
+          setBill={setBill}
+          setMood={setMood}
+          clearError={clearError}
+          setSplit={setSplit}
+          setResult={setResult}
+          setError={setError}
+          setStep={setStep}
+          updateTotal={updateTotal}
+        />
         <p>Venmo Link</p>
         <button className="btn btn-primary d-inline m-2" onClick={() => reset()}>Restart</button>
       </div>
