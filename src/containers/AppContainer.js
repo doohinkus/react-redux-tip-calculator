@@ -152,7 +152,7 @@ function AppContainer({
           updateTotal={updateTotal}
         />
         <p>Venmo Link</p>
-        <button className="btn btn-primary d-inline m-2" onClick={() => reset()}>Restart</button>
+        {/* <button className="btn btn-primary d-inline m-2" onClick={() => reset()}>Restart</button> */}
       </div>
     )
   return (
