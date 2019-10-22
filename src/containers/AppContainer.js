@@ -168,11 +168,11 @@ function AppContainer({
             Open Venmo
         </button> */}
 
-        <Route path="/" exact render={() => stepOne} />
-        <Route path="/1" render={() => stepOne} />
+        <Route path="/" exact render={() => result} />
+        {/* <Route path="/1" render={() => stepOne} />
         <Route path="/2" render={() => stepTwo} />
         <Route path="/3" render={() => stepThree} />
-        <Route path="/4" render={() => result} />
+        <Route path="/4" render={() => result} /> */}
         {/* <Route path="/" exact component={Bill} /> */}
 
         </section>

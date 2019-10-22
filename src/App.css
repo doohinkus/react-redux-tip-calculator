@@ -16,3 +16,16 @@
 .App-link {
   color: #09d3ac;
 }
+
+input{
+  background: none;
+  padding-left:.5em;
+  /* background: linear-gradient(180deg, gray, black); W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  border: none;
+  border-bottom: 2px solid gray;
+  color: white;
+  width: 5em;
+}
+.short{
+  width: 2em;
+}

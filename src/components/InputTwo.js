@@ -9,7 +9,8 @@ function Input({
   action, 
   field, 
   setResult,
-  clearError
+  clearError,
+  className
 }){
   const state = useSelector(state => state);
   const amount = useSelector(state => state[field]);
@@ -39,10 +40,11 @@ function Input({
         type="text"
         name={field}
         inputMode="decimal"
-        pattern="[0-9]*"
+        pattern="[0-9]+[.[0-9]{2}]?"
         maxLength={11}
         onChange={checkInput}
         value={amount}
+        className={className}
       />
     </>
   );

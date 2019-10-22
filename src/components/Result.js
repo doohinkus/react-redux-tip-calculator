@@ -25,31 +25,34 @@ function Result({
     parseFloat(state.bill) + 
     parseFloat(((state.tip)/100) * 
     state.bill)) / 
-    parseInt(state.split)).toFixed(2);
+    parseInt(state.split))
+    .toFixed(2);
   return (
     <div>  
-      <h1>Your Amount: ${isNaN(result) || result}</h1>
-      <Input 
+      <p>Bill:  
+        <Input 
         title="Tab/Bill"
         field="bill"
         setError={setError}
         setResult={setResult}
         clearError={clearError}
         action={setBill}
-      />
+        className={null}
+        />
+      </p>
       <h3>{isError && error}</h3>
-      <div className="d-flex flex-row align-items-center p-2">
+      <div className="d-flex flex-row align-items-center p-2 margin-auto">
         <p>Split: {state.split} person{state.split>1 && "s"}</p>
         <div className="d-flex flex-column">
             <button 
               onClick={(e) => {
-              updateSplit(1);
+                updateSplit(1);
               }}>
                 +
             </button>
             <button 
               onClick={(e) => {
-              updateSplit(-1);
+                updateSplit(-1);
               }}>
                 -
             </button>
@@ -65,9 +68,11 @@ function Result({
             setError={setError}
             setResult={setResult}
             clearError={clearError}
-          />
+            className="short"
+            />
           %): ${((state.bill / state.split) * state.tip/100).toFixed(2)}</p>
     
+            <h1>Your Amount: ${isNaN(result) || result}</h1>
     </div>
   )
 }
