@@ -27,5 +27,8 @@ input{
   width: 5em;
 }
 .short{
-  width: 2em;
+  width: 2.75em;
+}
+.shorter{
+  width: 2.25em;
 }

@@ -1,5 +1,6 @@
 import React, { Fragment, useState } from 'react';
 import { useSelector } from 'react-redux';
+// import NumericInput from 'react-numeric-input';
 
 
 
@@ -10,7 +11,8 @@ function Input({
   field, 
   setResult,
   clearError,
-  className
+  className,
+  step
 }){
   const state = useSelector(state => state);
   const amount = useSelector(state => state[field]);
@@ -21,6 +23,9 @@ function Input({
 
 
   function checkInput(e){
+    // console.log(e)
+    // action(e);
+
     const regEx = /^[0-9]*[.]?[0-9]*$/;
     if (regEx.test(e.target.value)){
       action(e.target.value);
@@ -37,13 +42,15 @@ function Input({
   return (
     <>
       <input 
-        type="text"
+        type="number"
+        step={step}
         name={field}
         inputMode="decimal"
-        pattern="[0-9]+[.[0-9]{2}]?"
+        pattern="[0-9]+.[0-9]{2}?"
         maxLength={11}
         onChange={checkInput}
         value={amount}
+        min={1}
         className={className}
       />
     </>

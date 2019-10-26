@@ -31,19 +31,34 @@ function Result({
     <div>  
       <p>Bill:  
         <Input 
-        title="Tab/Bill"
-        field="bill"
-        setError={setError}
-        setResult={setResult}
-        clearError={clearError}
-        action={setBill}
-        className={null}
+          title="Tab/Bill"
+          field="bill"
+          setError={setError}
+          setResult={setResult}
+          clearError={clearError}
+          action={setBill}
+          className={null}
+          step={.01}
         />
       </p>
       <h3>{isError && error}</h3>
-      <div className="d-flex flex-row align-items-center p-2 margin-auto">
-        <p>Split: {state.split} person{state.split>1 && "s"}</p>
-        <div className="d-flex flex-column">
+      {/* <div className="d-flex flex-row align-items-center p-2 margin-auto text-center"> */}
+        {/* <p>Split: {state.split} person{state.split>1 && "s"}</p>
+       */}
+       <p>
+        Split: 
+        <Input 
+          title="Split"
+          field="split"
+          setError={setError}
+          setResult={setResult}
+          clearError={clearError}
+          action={setSplit}
+          className="shorter"
+          step={1}
+        />  person{state.split>1 && "s"}
+       </p>
+        {/* <div className="d-flex flex-column">
             <button 
               onClick={(e) => {
                 updateSplit(1);
@@ -56,8 +71,8 @@ function Result({
               }}>
                 -
             </button>
-        </div>
-      </div>
+        </div> */}
+      {/* </div> */}
         <p className="p-2">Tip Amount ( 
           <Input 
             title="Tip"
@@ -69,6 +84,7 @@ function Result({
             setResult={setResult}
             clearError={clearError}
             className="short"
+            step={1}
             />
           %): ${((state.bill / state.split) * state.tip/100).toFixed(2)}</p>
     
