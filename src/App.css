@@ -3,14 +3,16 @@
 }
 
 .App-container {
-  background-color: #282c34;
+  /* background-color: #282c34; */
+  /* background-color: #60CCFF; */
+  background: linear-gradient(345deg, #1FA2FF, #60CCFF, #a6ffcb);
   min-height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   font-size: calc(10px + 2vmin);
-  color: white;
+  color: #EFFAFF;
 }
 
 .App-link {
@@ -22,8 +24,10 @@ input{
   padding-left:.5em;
   /* background: linear-gradient(180deg, gray, black); W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
   border: none;
-  border-bottom: 2px solid gray;
-  color: white;
+  border-bottom: 2px solid #DFF5FF;
+  outline: none;
+  /* color: white; */
+  color: #EFFAFF;
   width: 5em;
 }
 .short{

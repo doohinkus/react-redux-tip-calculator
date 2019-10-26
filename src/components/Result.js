@@ -58,22 +58,7 @@ function Result({
           step={1}
         />  person{state.split>1 && "s"}
        </p>
-        {/* <div className="d-flex flex-column">
-            <button 
-              onClick={(e) => {
-                updateSplit(1);
-              }}>
-                +
-            </button>
-            <button 
-              onClick={(e) => {
-                updateSplit(-1);
-              }}>
-                -
-            </button>
-        </div> */}
-      {/* </div> */}
-        <p className="p-2">Tip Amount ( 
+        <p>Tip Amount ( 
           <Input 
             title="Tip"
             field="tip"
