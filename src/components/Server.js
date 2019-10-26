@@ -1,7 +1,7 @@
 import React from "react";
 import { useSelector } from 'react-redux';
-function Server({ label }){
 
+function Server({ label }){
   const server = useSelector(state => state.mood)
   return (
     <div>

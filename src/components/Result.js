@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useSelector } from 'react-redux';
-import Input from './InputTwo';
+import Input from './Input';
 
 function Result({
   setTip,
@@ -16,11 +16,7 @@ function Result({
   
   const state = useSelector(state => state);
 
-  function updateSplit(value){
-    if (state.split + value > 0){
-      setSplit(parseInt(state.split) + parseInt(value));
-    }
-  }
+  
   const result = ((
     parseFloat(state.bill) + 
     parseFloat(((state.tip)/100) * 
@@ -39,12 +35,10 @@ function Result({
           action={setBill}
           className={null}
           step={.01}
+          min={.01}
         />
       </p>
       <h3>{isError && error}</h3>
-      {/* <div className="d-flex flex-row align-items-center p-2 margin-auto text-center"> */}
-        {/* <p>Split: {state.split} person{state.split>1 && "s"}</p>
-       */}
        <p>
         Split: 
         <Input 
@@ -56,6 +50,7 @@ function Result({
           action={setSplit}
           className="shorter"
           step={1}
+          min={1}
         />  person{state.split>1 && "s"}
        </p>
         <p>Tip Amount ( 
@@ -70,6 +65,7 @@ function Result({
             clearError={clearError}
             className="short"
             step={1}
+            min={0}
             />
           %): ${((state.bill / state.split) * state.tip/100).toFixed(2)}</p>
     
