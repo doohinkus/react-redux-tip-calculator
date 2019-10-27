@@ -5,7 +5,10 @@
 .App-container {
   /* background-color: #282c34; */
   /* background-color: #60CCFF; */
-  background: linear-gradient(345deg, #1FA2FF, #60CCFF, #a6ffcb);
+  /* background: linear-gradient(345deg, #1FA2FF, #60CCFF, #a6ffcb); */
+  background: linear-gradient(345deg, #bc4e9c, #f80759);
+  background-size: 200% 200%;
+  animation: gradientBG 15s ease-in-out infinite;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -36,4 +39,16 @@ input{
 }
 .shorter{
   width: 2.25em;
+}
+
+@keyframes gradientBG {
+	0% {
+		background-position: 0% 50%;
+	}
+	50% {
+		background-position: 100% 50%;
+	}
+	100% {
+		background-position: 0% 50%;
+	}
 }
