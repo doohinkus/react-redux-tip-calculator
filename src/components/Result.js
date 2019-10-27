@@ -23,8 +23,9 @@ function Result({
     state.bill)) / 
     parseInt(state.split))
     .toFixed(2);
-  return (
-    <div>  
+    return (
+      <div>  
+      <h1>Your Amount: <br />${isNaN(result) || result}</h1>
       <p>Bill:  
         <Input 
           title="Tab/Bill"
@@ -69,7 +70,6 @@ function Result({
             />
           %): ${((state.bill / state.split) * state.tip/100).toFixed(2)}</p>
     
-            <h1>Your Amount: ${isNaN(result) || result}</h1>
     </div>
   )
 }
