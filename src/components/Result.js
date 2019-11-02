@@ -73,6 +73,7 @@ function Result({
                 min={0}
                 />
               %): <br /><span style={colorHightlight}>${((state.bill / state.split) * state.tip/100).toFixed(2)}</span></p>
+              <button style={{opacity: "0"}} onSubmit={e => e.preventDefault()}>Submit</button>
       </form>
     
     </div>
