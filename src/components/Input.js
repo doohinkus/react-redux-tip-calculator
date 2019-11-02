@@ -37,6 +37,7 @@ function Input({
         value={amount}
         min={min}
         className={className}
+        autofocus={field === "bill" ? "autofocus" : "false"}
       />
     </>
   );
