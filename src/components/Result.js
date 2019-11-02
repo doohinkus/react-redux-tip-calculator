@@ -18,6 +18,8 @@ function Result({
   function onSubmit(e){
     console.log("submit");
     e.preventDefault();
+    
+    e.target.blur();
   }
   
   const result = ((
