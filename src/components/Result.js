@@ -16,9 +16,8 @@ function Result({
   
   const state = useSelector(state => state);
   function onSubmit(e){
-    console.log("submit");
     e.preventDefault();
-    
+    // removes keyboard when user hits "go"
     e.target.blur();
   }
   
@@ -83,7 +82,6 @@ function Result({
 
                 />
               %): <br /><span style={colorHightlight}>${((state.bill / state.split) * state.tip/100).toFixed(2)}</span></p>
-              {/* <button style={{opacity: "0"}} onSubmit={e => e.preventDefault()}>Submit</button> */}
       </form>
     
     </div>
