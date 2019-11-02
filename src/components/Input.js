@@ -10,7 +10,8 @@ function Input({
   clearError,
   className,
   step,
-  min
+  min,
+  onSubmit
 }){
   const amount = useSelector(state => state[field]);
   
@@ -37,7 +38,11 @@ function Input({
         value={amount}
         min={min}
         className={className}
-        autofocus={field === "bill" ? "autofocus" : "false"}
+        autoFocus={field === "bill" ? "autofocus" : false}
+        // onBlur={onSubmit}
+        onKeyUp={e => {
+          if(e.keyCode ===13) onSubmit(e);
+        }}
       />
     </>
   );
