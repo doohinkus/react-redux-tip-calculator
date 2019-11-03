@@ -32,7 +32,6 @@ function Result({
   }
     return (
       <div>  
-      <h1>Your Amount: <br /><span style={colorHightlight}>${isNaN(result) || result}</span></h1>
       <form onSubmit={onSubmit}>
           <p>Bill:  
             <Input 
@@ -83,6 +82,8 @@ function Result({
                 />
               %): <br /><span style={colorHightlight}>${((state.bill / state.split) * state.tip/100).toFixed(2)}</span></p>
       </form>
+      <h1>Your Amount: <br /><span style={colorHightlight}>${isNaN(result) || result}</span></h1>
+
     
     </div>
   )
